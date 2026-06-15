@@ -137,3 +137,129 @@ Stacktrace:
 
 2026-06-15 22:28:35,409 - __main__ - WARNING - No data scraped.
 2026-06-15 22:28:35,410 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:45:04,398 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 22:45:04,403 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:45:04,404 - scrapers.static_scraper - INFO - Starting static scrape on https://kitabay.com/?srsltid=AfmBOopVff5SD-cF0Vw7UJi7f-fa3jjTte6_ektc89Rxl5diqt87Clak
+2026-06-15 22:45:05,825 - scrapers.static_scraper - INFO - Successfully scraped 0 books from static source.
+2026-06-15 22:45:05,827 - WDM - INFO - ====== WebDriver manager ======
+2026-06-15 22:45:05,869 - WDM - INFO - Driver [/home/sidhharth/.wdm/drivers/chromedriver/linux64/149.0.7827.115/chromedriver-linux64/chromedriver] found in cache by browser version
+2026-06-15 22:45:06,263 - scrapers.selenium_scraper - INFO - Selenium WebDriver initialized successfully.
+2026-06-15 22:45:06,263 - scrapers.selenium_scraper - INFO - Starting selenium scrape on https://kitabay.com/?srsltid=AfmBOopVff5SD-cF0Vw7UJi7f-fa3jjTte6_ektc89Rxl5diqt87Clak
+2026-06-15 22:45:22,565 - scrapers.selenium_scraper - ERROR - Selenium scraping failed: Message: 
+Stacktrace:
+#0 0x64affc09929a <unknown>
+#1 0x64affba7b449 <unknown>
+#2 0x64affbacfbaf <unknown>
+#3 0x64affbacfe01 <unknown>
+#4 0x64affbb1aae4 <unknown>
+#5 0x64affbb17cbf <unknown>
+#6 0x64affbac3132 <unknown>
+#7 0x64affbac3f41 <unknown>
+#8 0x64affc05f737 <unknown>
+#9 0x64affc05df39 <unknown>
+#10 0x64affc048c26 <unknown>
+#11 0x64affc05eada <unknown>
+#12 0x64affc030bd0 <unknown>
+#13 0x64affc085c28 <unknown>
+#14 0x64affc085dc5 <unknown>
+#15 0x64affc097e1e <unknown>
+#16 0x7dfff00a27f1 <unknown>
+#17 0x7dfff0133b5c <unknown>
+
+2026-06-15 22:45:22,645 - __main__ - WARNING - No data scraped.
+2026-06-15 22:45:22,646 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:45:37,174 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-15 22:45:37,175 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-06-15 22:45:37,175 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 22:45:37,392 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 22:45:37,490 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 22:46:48,812 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:46:48,840 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2026 22:46:48] "GET / HTTP/1.1" 200 -
+2026-06-15 22:46:49,056 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2026 22:46:49] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-15 22:47:29,438 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 22:47:29,444 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:47:29,444 - scrapers.static_scraper - INFO - Starting static scrape on https://kitabay.com/?srsltid=AfmBOopVff5SD-cF0Vw7UJi7f-fa3jjTte6_ektc89Rxl5diqt87Clak
+2026-06-15 22:47:30,247 - scrapers.static_scraper - INFO - Successfully scraped 0 books from static source.
+2026-06-15 22:47:30,249 - WDM - INFO - ====== WebDriver manager ======
+2026-06-15 22:47:30,286 - WDM - INFO - Driver [/home/sidhharth/.wdm/drivers/chromedriver/linux64/149.0.7827.115/chromedriver-linux64/chromedriver] found in cache by browser version
+2026-06-15 22:47:30,612 - scrapers.selenium_scraper - INFO - Selenium WebDriver initialized successfully.
+2026-06-15 22:47:30,613 - scrapers.selenium_scraper - INFO - Starting selenium scrape on https://kitabay.com/?srsltid=AfmBOopVff5SD-cF0Vw7UJi7f-fa3jjTte6_ektc89Rxl5diqt87Clak
+2026-06-15 22:47:46,478 - scrapers.selenium_scraper - ERROR - Selenium scraping failed: Message: 
+Stacktrace:
+#0 0x59060ce5f29a <unknown>
+#1 0x59060c841449 <unknown>
+#2 0x59060c895baf <unknown>
+#3 0x59060c895e01 <unknown>
+#4 0x59060c8e0ae4 <unknown>
+#5 0x59060c8ddcbf <unknown>
+#6 0x59060c889132 <unknown>
+#7 0x59060c889f41 <unknown>
+#8 0x59060ce25737 <unknown>
+#9 0x59060ce23f39 <unknown>
+#10 0x59060ce0ec26 <unknown>
+#11 0x59060ce24ada <unknown>
+#12 0x59060cdf6bd0 <unknown>
+#13 0x59060ce4bc28 <unknown>
+#14 0x59060ce4bdc5 <unknown>
+#15 0x59060ce5de1e <unknown>
+#16 0x72bbfd2a27f1 <unknown>
+#17 0x72bbfd333b5c <unknown>
+
+2026-06-15 22:47:46,576 - __main__ - WARNING - No data scraped.
+2026-06-15 22:47:46,578 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:54:51,270 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-15 22:54:51,270 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-06-15 22:54:51,270 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 22:54:51,411 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 22:54:51,412 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 22:54:56,739 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 22:54:56,746 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:54:56,746 - scrapers.static_scraper - INFO - Starting static scrape on https://kitabay.com/?srsltid=AfmBOopVff5SD-cF0Vw7UJi7f-fa3jjTte6_ektc89Rxl5diqt87Clak
+2026-06-15 22:54:57,876 - scrapers.static_scraper - INFO - Scraped 0 books from BooksToScrape.
+2026-06-15 22:54:57,877 - scrapers.shopify_scraper - INFO - Starting Shopify API scrape on https://kitabay.com
+2026-06-15 22:57:14,118 - scrapers.shopify_scraper - INFO - Scraped 24473 books from Kitabay.
+2026-06-15 22:57:14,208 - pipeline.cleaner - INFO - Cleaned 21743 records.
+2026-06-15 22:58:34,353 - __main__ - INFO - Successfully processed and stored 21743 books.
+2026-06-15 22:58:34,354 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:59:02,001 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-15 22:59:02,001 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-06-15 22:59:02,001 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 22:59:02,130 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 22:59:02,130 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 22:59:05,917 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:59:06,339 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2026 22:59:06] "GET / HTTP/1.1" 200 -
+2026-06-15 23:00:51,760 - werkzeug - INFO -  * Detected change in '/home/sidhharth/sppu/git/web_scraping/app.py', reloading
+2026-06-15 23:00:51,876 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:00:52,227 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:00:52,227 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 23:01:26,930 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-15 23:01:26,931 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-06-15 23:01:26,931 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:01:27,079 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:01:27,079 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 23:01:42,228 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 23:01:42,631 - werkzeug - INFO - 127.0.0.1 - - [15/Jun/2026 23:01:42] "GET / HTTP/1.1" 200 -
+2026-06-15 23:02:56,418 - werkzeug - INFO -  * Detected change in '/home/sidhharth/sppu/git/web_scraping/config.py', reloading
+2026-06-15 23:02:56,487 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:02:56,707 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:02:56,708 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 23:03:07,745 - werkzeug - INFO -  * Detected change in '/home/sidhharth/sppu/git/web_scraping/database/mongo.py', reloading
+2026-06-15 23:03:07,826 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:03:08,026 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:03:08,026 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 23:03:24,095 - werkzeug - INFO -  * Detected change in '/home/sidhharth/sppu/git/web_scraping/pipeline/cleaner.py', reloading
+2026-06-15 23:03:24,176 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:03:24,334 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:03:24,334 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 23:03:43,418 - werkzeug - INFO -  * Detected change in '/home/sidhharth/sppu/git/web_scraping/main.py', reloading
+2026-06-15 23:03:43,496 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:03:43,650 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:03:43,650 - werkzeug - INFO -  * Debugger PIN: 697-032-834
+2026-06-15 23:03:56,702 - werkzeug - INFO -  * Detected change in '/home/sidhharth/sppu/git/web_scraping/app.py', reloading
+2026-06-15 23:03:56,766 - werkzeug - INFO -  * Restarting with stat
+2026-06-15 23:03:57,044 - werkzeug - WARNING -  * Debugger is active!
+2026-06-15 23:03:57,045 - werkzeug - INFO -  * Debugger PIN: 697-032-834

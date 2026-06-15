@@ -1,7 +1,9 @@
-requests
-beautifulsoup4
-selenium
-pandas
-pymongo
-python-dotenv
-webdriver-manager
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+selenium>=4.18.0
+pandas>=2.2.0
+pymongo>=4.6.0
+python-dotenv>=1.0.0
+webdriver-manager>=4.0.1
+flask>=3.0.0
+lxml>=5.1.0

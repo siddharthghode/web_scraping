@@ -11,15 +11,16 @@ import time
 logger = logging.getLogger(__name__)
 
 class SeleniumScraper:
-    def __init__(self, base_url):
-        self.base_url = base_url
-        self.source = "BooksToScrape_Selenium"
-        
+    def __init__(self, site_config):
+        self.base_url = site_config["url"]
+        self.source = site_config["name"]
+        self.selectors = site_config["selectors"]
+
         chrome_options = Options()
-        chrome_options.add_argument("--headless") # Run in headless mode
+        chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        
+
         try:
             self.driver = webdriver.Chrome(
                 service=Service(ChromeDriverManager().install()),
@@ -36,45 +37,41 @@ class SeleniumScraper:
 
         logger.info(f"Starting selenium scrape on {self.base_url}")
         books = []
+        s = self.selectors
         try:
             self.driver.get(self.base_url)
-            
-            # Wait for products to load
             wait = WebDriverWait(self.driver, 10)
-            wait.until(EC.presence_of_element_located((By.CLASS_NAME, "product_pod")))
-            
-            # Simulate scrolling
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, s["book_container"])))
+
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(2)
-            
-            articles = self.driver.find_elements(By.CLASS_NAME, "product_pod")
-            
+
+            articles = self.driver.find_elements(By.CSS_SELECTOR, s["book_container"])
+
             for article in articles:
                 try:
-                    title_elem = article.find_element(By.TAG_NAME, "h3").find_element(By.TAG_NAME, "a")
-                    title = title_elem.get_attribute("title")
-                    price = article.find_element(By.CLASS_NAME, "price_color").text
-                    # Rating is in class attribute of the <p> tag
-                    rating_elem = article.find_element(By.CSS_SELECTOR, "p[class^='star-rating']")
-                    rating = rating_elem.get_attribute("class").split()[-1]
-                    availability = article.find_element(By.CLASS_NAME, "instock").text.strip()
-                    link = title_elem.get_attribute("href")
-                    
+                    title_el = article.find_element(By.CSS_SELECTOR, s["title"])
+                    title = title_el.get_attribute("title") or title_el.text.strip()
+                    price_el = article.find_element(By.CSS_SELECTOR, s["price"])
+                    rating_el = article.find_element(By.CSS_SELECTOR, s["rating"])
+                    avail_el = article.find_element(By.CSS_SELECTOR, s["availability"])
+                    link_el = article.find_element(By.CSS_SELECTOR, s["link"])
+
                     books.append({
                         "title": title,
-                        "price": price,
-                        "rating": rating,
-                        "availability": availability,
-                        "url": link,
+                        "price": price_el.text.strip(),
+                        "rating": rating_el.get_attribute("class").split()[-1],
+                        "availability": avail_el.text.strip(),
+                        "url": link_el.get_attribute("href"),
                         "source": self.source
                     })
                 except Exception as e:
                     logger.error(f"Error parsing book in Selenium: {e}")
-            
-            logger.info(f"Successfully scraped {len(books)} books from selenium source.")
+
+            logger.info(f"Scraped {len(books)} books from {self.source}.")
         except Exception as e:
             logger.error(f"Selenium scraping failed: {e}")
         finally:
             self.driver.quit()
-        
+
         return books

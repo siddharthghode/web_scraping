@@ -32,7 +32,7 @@ BookTracker/
    ```bash
    python main.py
    ```
-
+4. set target url in config.py file and run main.py then check flask server..
 ## Workflow
 1. **Extraction**: Scrapers fetch raw data from target websites.
 2. **Transformation**: The data cleaner processes prices, ratings, and timestamps.
