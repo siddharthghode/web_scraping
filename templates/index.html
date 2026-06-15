@@ -3,394 +3,642 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Tracker</title>
+    <title>Book Price Tracker</title>
     <style>
+        :root {
+            --primary: #1e293b;
+            --primary-light: #334155;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #94a3b8;
+            --green: #22c55e;
+            --green-bg: #f0fdf4;
+            --red: #ef4444;
+            --red-bg: #fef2f2;
+            --sidebar-w: 240px;
+            --header-h: 60px;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f6f9;
-            color: #333;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* ── Header ── */
+        /* ────────────────── HEADER ────────────────── */
         header {
-            background: #2c3e50;
-            color: white;
-            padding: 18px 32px;
+            height: var(--header-h);
+            background: var(--primary);
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 28px;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        header h1 { font-size: 1.4rem; }
-        header span { font-size: 0.85rem; opacity: 0.65; }
-
-        /* ── Layout ── */
-        .layout {
-            display: flex;
-            flex: 1;
+            z-index: 200;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
         }
 
-        /* ── Sidebar ── */
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-left .logo { font-size: 1.5rem; }
+        .header-left h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.3px; }
+        .header-left h1 span { color: var(--accent); }
+
+        .header-right { display: flex; align-items: center; gap: 16px; }
+
+        .header-badge {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .refresh-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 7px 14px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .refresh-btn:hover { background: var(--accent-hover); }
+
+        /* ────────────────── LAYOUT ────────────────── */
+        .layout { display: flex; flex: 1; }
+
+        /* ────────────────── SIDEBAR ────────────────── */
         aside {
-            width: 220px;
-            min-width: 220px;
-            background: #fff;
-            border-right: 1px solid #e8e8e8;
-            padding: 24px 0;
+            width: var(--sidebar-w);
+            min-width: var(--sidebar-w);
+            background: var(--surface);
+            border-right: 1px solid var(--border);
             position: sticky;
-            top: 57px;
-            height: calc(100vh - 57px);
+            top: var(--header-h);
+            height: calc(100vh - var(--header-h));
             overflow-y: auto;
+            padding: 20px 0 20px;
         }
 
-        aside h3 {
-            font-size: 0.7rem;
+        .sidebar-label {
+            font-size: 0.68rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #aaa;
-            padding: 0 20px 10px;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 0 18px 8px;
         }
 
-        aside a {
+        .sidebar-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
+            padding: 9px 18px;
             text-decoration: none;
-            color: #444;
-            font-size: 0.88rem;
+            color: #475569;
+            font-size: 0.875rem;
             border-left: 3px solid transparent;
             transition: all 0.15s;
+            gap: 8px;
         }
 
-        aside a:hover, aside a.active {
-            background: #f0f4ff;
-            color: #2c3e50;
-            border-left-color: #2c3e50;
+        .sidebar-link:hover {
+            background: #f8fafc;
+            color: var(--primary);
+            border-left-color: var(--accent);
+        }
+
+        .sidebar-link.active {
+            background: #eff6ff;
+            color: var(--accent);
+            border-left-color: var(--accent);
             font-weight: 600;
         }
 
-        aside a .count {
-            background: #eef0f5;
-            color: #666;
-            font-size: 0.75rem;
+        .sidebar-link .link-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .sidebar-count {
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 0.72rem;
             padding: 2px 7px;
             border-radius: 10px;
+            font-weight: 600;
+            flex-shrink: 0;
         }
 
-        aside .divider {
-            border: none;
-            border-top: 1px solid #f0f0f0;
-            margin: 12px 0;
-        }
+        .sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
 
-        aside a.all-link { color: #2c3e50; font-weight: 600; }
+        /* ────────────────── MAIN ────────────────── */
+        main { flex: 1; padding: 24px 28px; overflow-x: hidden; }
 
-        /* ── Main content ── */
-        main {
-            flex: 1;
-            padding: 28px 32px;
-            overflow-y: auto;
-        }
-
-        /* ── Global stats ── */
+        /* ────────────────── GLOBAL STATS ────────────────── */
         .global-stats {
-            display: flex;
-            gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
             margin-bottom: 28px;
-            flex-wrap: wrap;
         }
 
         .stat-card {
-            background: white;
-            border-radius: 10px;
-            padding: 16px 22px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-            min-width: 130px;
-        }
-        .stat-card p { font-size: 0.75rem; color: #999; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-card h2 { font-size: 1.7rem; color: #2c3e50; font-weight: 700; }
-
-        /* ── Source section ── */
-        .source-section {
-            margin-bottom: 40px;
-            scroll-margin-top: 80px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: white;
-            border-radius: 10px 10px 0 0;
-            padding: 16px 20px;
-            border-bottom: 2px solid #f0f0f0;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .section-header:hover { background: #fafbfc; }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title h2 { font-size: 1rem; color: #2c3e50; }
-
-        .section-meta {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .meta-pill {
-            font-size: 0.78rem;
-            padding: 3px 10px;
+            background: var(--surface);
             border-radius: 12px;
-            font-weight: 600;
-        }
-
-        .pill-total { background: #eef2ff; color: #4a6fa5; }
-        .pill-instock { background: #e6f9f0; color: #27ae60; }
-        .pill-outstock { background: #fdecea; color: #e74c3c; }
-
-        .toggle-icon { font-size: 0.9rem; color: #aaa; transition: transform 0.2s; }
-        .toggle-icon.open { transform: rotate(180deg); }
-
-        /* ── Source mini-stats ── */
-        .source-stats {
-            display: flex;
-            gap: 0;
-            background: #f9fafb;
-            border-bottom: 1px solid #eee;
-            padding: 10px 20px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .source-stats span { font-size: 0.82rem; color: #666; }
-        .source-stats strong { color: #2c3e50; }
-
-        /* ── Search bar per section ── */
-        .section-search {
-            background: #f9fafb;
-            padding: 10px 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .section-search input {
-            padding: 7px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 0.88rem;
-            width: 280px;
-            outline: none;
-        }
-        .section-search input:focus { border-color: #2c3e50; }
-
-        /* ── Table ── */
-        .table-wrapper {
-            background: white;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+            position: relative;
             overflow: hidden;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
         }
 
-        thead { background: #2c3e50; color: white; }
-        thead th { padding: 12px 14px; text-align: left; font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+        .stat-card.green::before { background: var(--green); }
+        .stat-card.red::before { background: var(--red); }
+        .stat-card.purple::before { background: #8b5cf6; }
 
-        tbody tr { border-bottom: 1px solid #f2f2f2; transition: background 0.12s; }
+        .stat-card .label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-card .sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ────────────────── SOURCE SECTION ────────────────── */
+        .source-section {
+            margin-bottom: 32px;
+            scroll-margin-top: calc(var(--header-h) + 16px);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .section-header {
+            background: var(--surface);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+            user-select: none;
+        }
+
+        .section-header:hover { background: #f8fafc; }
+
+        .section-header-left { display: flex; align-items: center; gap: 12px; }
+
+        .source-icon {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            background: #eff6ff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .section-header-left h2 { font-size: 0.95rem; font-weight: 700; color: var(--primary); }
+        .section-header-left .source-url { font-size: 0.75rem; color: var(--text-muted); margin-top: 1px; }
+
+        .section-header-right { display: flex; align-items: center; gap: 8px; }
+
+        .pill {
+            font-size: 0.73rem;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+        .pill-blue { background: #eff6ff; color: var(--accent); }
+        .pill-green { background: var(--green-bg); color: #16a34a; }
+        .pill-red { background: var(--red-bg); color: #dc2626; }
+
+        .collapse-btn {
+            width: 28px; height: 28px;
+            border-radius: 6px;
+            background: #f1f5f9;
+            border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        .collapse-btn:hover { background: #e2e8f0; }
+        .collapse-btn.open { transform: rotate(180deg); }
+
+        /* ── Mini Stats Bar ── */
+        .section-meta-bar {
+            background: #f8fafc;
+            padding: 10px 20px;
+            display: flex;
+            gap: 24px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .meta-item { font-size: 0.8rem; color: #64748b; }
+        .meta-item strong { color: var(--primary); font-weight: 600; }
+
+        /* ── Toolbar ── */
+        .section-toolbar {
+            background: #f8fafc;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            padding: 7px 12px 7px 32px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            font-size: 0.85rem;
+            outline: none;
+            width: 260px;
+            background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus { border-color: var(--accent); }
+
+        .sort-select {
+            padding: 7px 10px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            font-size: 0.82rem;
+            outline: none;
+            background: white;
+            cursor: pointer;
+            color: #475569;
+        }
+
+        .result-count { font-size: 0.8rem; color: var(--text-muted); margin-left: auto; }
+
+        /* ────────────────── TABLE ────────────────── */
+        .table-wrap { overflow-x: auto; background: white; }
+
+        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+
+        thead tr { background: var(--primary); }
+        thead th {
+            padding: 11px 14px;
+            text-align: left;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+        }
+        thead th:hover { background: var(--primary-light); }
+
+        tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.1s; }
         tbody tr:last-child { border-bottom: none; }
-        tbody tr:hover { background: #f7f9fc; }
-        tbody td { padding: 11px 14px; font-size: 0.88rem; vertical-align: middle; }
+        tbody tr:hover { background: #f8fafc; }
+        tbody tr.hidden-row { display: none; }
+
+        tbody td { padding: 11px 14px; font-size: 0.875rem; vertical-align: middle; }
+
+        .td-index { color: var(--text-muted); font-size: 0.8rem; width: 40px; }
+
+        .td-title { font-weight: 500; max-width: 260px; }
+        .td-title span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .td-price { font-weight: 700; color: var(--primary); white-space: nowrap; }
+
+        .stars { color: #f59e0b; letter-spacing: 1px; font-size: 0.82rem; }
+        .stars-na { color: #cbd5e1; font-size: 0.78rem; }
 
         .badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             padding: 3px 9px;
-            border-radius: 12px;
-            font-size: 0.76rem;
+            border-radius: 20px;
+            font-size: 0.73rem;
             font-weight: 600;
+            white-space: nowrap;
         }
-        .badge-available { background: #e6f9f0; color: #27ae60; }
-        .badge-unavailable { background: #fdecea; color: #e74c3c; }
+        .badge-in { background: var(--green-bg); color: #16a34a; }
+        .badge-out { background: var(--red-bg); color: #dc2626; }
 
-        .stars { color: #f39c12; letter-spacing: 1px; font-size: 0.85rem; }
-
-        a.url-link {
-            color: #2980b9;
+        .url-cell a {
+            color: var(--accent);
             text-decoration: none;
-            font-size: 0.82rem;
-            max-width: 220px;
+            font-size: 0.8rem;
+            max-width: 200px;
             display: inline-block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             vertical-align: middle;
         }
-        a.url-link:hover { text-decoration: underline; }
+        .url-cell a:hover { text-decoration: underline; }
 
-        .no-data {
+        .td-time { color: var(--text-muted); font-size: 0.78rem; white-space: nowrap; }
+
+        .history-btn {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 3px 8px;
+            font-size: 0.73rem;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .history-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ── Empty state ── */
+        .section-empty {
+            padding: 48px;
             text-align: center;
-            padding: 60px;
-            color: #bbb;
-            font-size: 0.95rem;
+            color: var(--text-muted);
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            font-size: 0.9rem;
         }
 
-        .hidden { display: none; }
+        /* ── No data ── */
+        .no-data {
+            background: white;
+            border-radius: 14px;
+            padding: 80px 40px;
+            text-align: center;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .no-data .icon { font-size: 3rem; margin-bottom: 12px; }
+        .no-data p { font-size: 0.95rem; }
+        .no-data code { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 0.88rem; color: var(--primary); }
+
+        /* ────────────────── MODAL ────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 14px;
+            width: 480px;
+            max-width: 95vw;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-header h3 { font-size: 0.95rem; font-weight: 700; }
+        .modal-close {
+            background: #f1f5f9; border: none; border-radius: 6px;
+            width: 28px; height: 28px; cursor: pointer; font-size: 1rem;
+            color: #64748b; display: flex; align-items: center; justify-content: center;
+        }
+        .modal-close:hover { background: #e2e8f0; }
+
+        .modal-body { padding: 16px 20px; }
+
+        .history-table { width: 100%; border-collapse: collapse; }
+        .history-table th, .history-table td { padding: 9px 12px; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; }
+        .history-table th { font-weight: 600; color: #64748b; font-size: 0.78rem; text-transform: uppercase; }
+        .history-table td:first-child { font-weight: 600; color: var(--primary); }
+
+        /* ────────────────── FOOTER ────────────────── */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 14px;
+            font-size: 0.78rem;
+        }
+        footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+        footer a:hover { color: white; }
+
+        /* ────────────────── COLLAPSE ANIMATION ────────────────── */
+        .collapsible { transition: max-height 0.3s ease, opacity 0.3s ease; overflow: hidden; }
+        .collapsible.collapsed { max-height: 0 !important; opacity: 0; }
     </style>
 </head>
 <body>
 
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
 <header>
-    <h1>📚 Book Price Tracker</h1>
-    <span>{{ books | length }} total records across {{ grouped | length }} source(s)</span>
+    <div class="header-left">
+        <span class="logo">📚</span>
+        <h1>Book <span>Tracker</span></h1>
+    </div>
+    <div class="header-right">
+        <span class="header-badge">{{ books | length }} records · {{ grouped | length }} source(s)</span>
+        <a href="/" class="refresh-btn">↻ Refresh</a>
+    </div>
 </header>
 
 <div class="layout">
 
-    <!-- Sidebar -->
-    <aside>
-        <h3>Sources</h3>
-        <a href="#all" class="all-link">
-            All Sources
-            <span class="count">{{ books | length }}</span>
+    <!-- ═══════════════════════ SIDEBAR ═══════════════════════ -->
+    <aside id="sidebar">
+        <div class="sidebar-label">Navigation</div>
+        <a href="#overview" class="sidebar-link" data-target="overview">
+            <span class="link-text">📊 Overview</span>
         </a>
-        <hr class="divider">
-        {% for source, source_books in grouped.items() %}
-        <a href="#{{ source | replace(' ', '-') | lower }}">
-            {{ source }}
-            <span class="count">{{ source_books | length }}</span>
+        <hr class="sidebar-divider">
+        <div class="sidebar-label">Sources</div>
+        {% for source in grouped %}
+        <a href="#src-{{ loop.index }}" class="sidebar-link" data-target="src-{{ loop.index }}">
+            <span class="link-text">🌐 {{ source }}</span>
+            <span class="sidebar-count">{{ grouped[source] | length }}</span>
         </a>
         {% endfor %}
     </aside>
 
-    <!-- Main -->
+    <!-- ═══════════════════════ MAIN ═══════════════════════ -->
     <main>
 
         <!-- Global Stats -->
-        <div class="global-stats" id="all">
+        <div class="global-stats" id="overview">
             <div class="stat-card">
-                <p>Total Books</p>
-                <h2>{{ books | length }}</h2>
+                <div class="label">Total Books</div>
+                <div class="value">{{ books | length }}</div>
+                <div class="sub">across all sources</div>
             </div>
-            <div class="stat-card">
-                <p>In Stock</p>
-                <h2>{{ books | selectattr('availability', 'equalto', true) | list | length }}</h2>
+            <div class="stat-card green">
+                <div class="label">In Stock</div>
+                <div class="value">{{ books | selectattr('availability', 'equalto', true) | list | length }}</div>
+                <div class="sub">available now</div>
             </div>
-            <div class="stat-card">
-                <p>Sources</p>
-                <h2>{{ grouped | length }}</h2>
+            <div class="stat-card red">
+                <div class="label">Out of Stock</div>
+                <div class="value">{{ books | selectattr('availability', 'equalto', false) | list | length }}</div>
+                <div class="sub">unavailable</div>
             </div>
-            <div class="stat-card">
-                <p>Out of Stock</p>
-                <h2>{{ books | selectattr('availability', 'equalto', false) | list | length }}</h2>
+            <div class="stat-card purple">
+                <div class="label">Sources</div>
+                <div class="value">{{ grouped | length }}</div>
+                <div class="sub">sites tracked</div>
             </div>
         </div>
 
         {% if books %}
             {% for source, source_books in grouped.items() %}
-            {% set in_stock = source_books | selectattr('availability', 'equalto', true) | list | length %}
-            {% set out_stock = source_books | length - in_stock %}
+            {% set in_stock  = source_books | selectattr('availability', 'equalto', true)  | list | length %}
+            {% set out_stock = source_books | selectattr('availability', 'equalto', false) | list | length %}
+            {% set avg_price = (source_books | sum(attribute='price')) / source_books | length %}
+            {% set sid = "src-" ~ loop.index %}
+            {% set tid = "tbl-" ~ loop.index %}
 
-            <div class="source-section" id="{{ source | replace(' ', '-') | lower }}">
+            <div class="source-section" id="{{ sid }}">
 
-                <!-- Section Header (clickable to collapse) -->
+                <!-- Section header -->
                 <div class="section-header" onclick="toggleSection('{{ loop.index }}')">
-                    <div class="section-title">
-                        <span>🌐</span>
-                        <h2>{{ source }}</h2>
+                    <div class="section-header-left">
+                        <div class="source-icon">🌐</div>
+                        <div>
+                            <h2>{{ source }}</h2>
+                        </div>
                     </div>
-                    <div class="section-meta">
-                        <span class="meta-pill pill-total">{{ source_books | length }} books</span>
-                        <span class="meta-pill pill-instock">{{ in_stock }} in stock</span>
-                        {% if out_stock > 0 %}
-                        <span class="meta-pill pill-outstock">{{ out_stock }} out of stock</span>
-                        {% endif %}
-                        <span class="toggle-icon open" id="icon-{{ loop.index }}">▼</span>
+                    <div class="section-header-right">
+                        <span class="pill pill-blue">{{ source_books | length }} books</span>
+                        {% if in_stock > 0 %}<span class="pill pill-green">{{ in_stock }} in stock</span>{% endif %}
+                        {% if out_stock > 0 %}<span class="pill pill-red">{{ out_stock }} out of stock</span>{% endif %}
+                        <button class="collapse-btn open" id="cbtn-{{ loop.index }}">▼</button>
                     </div>
                 </div>
 
-                <!-- Collapsible body -->
-                <div id="body-{{ loop.index }}">
+                <!-- Collapsible content -->
+                <div class="collapsible" id="body-{{ loop.index }}" style="max-height: 9999px;">
 
-                    <!-- Mini stats -->
-                    <div class="source-stats">
-                        <span>Avg Price: <strong>
-                            {% set prices = source_books | map(attribute='price') | list %}
-                            £{{ "%.2f" | format((source_books | sum(attribute='price')) / source_books | length) }}
-                        </strong></span>
-                        <span>Last Scraped: <strong>{{ source_books[0].timestamp if source_books[0].timestamp else 'N/A' }}</strong></span>
+                    <!-- Meta bar -->
+                    <div class="section-meta-bar">
+                        <span class="meta-item">Avg Price: <strong>{{ "%.2f" | format(avg_price) }}</strong></span>
+                        <span class="meta-item">In Stock: <strong>{{ in_stock }}</strong></span>
+                        <span class="meta-item">Out of Stock: <strong>{{ out_stock }}</strong></span>
+                        <span class="meta-item">Last Scraped: <strong>{{ source_books[0].timestamp if source_books[0].timestamp else 'N/A' }}</strong></span>
                     </div>
 
-                    <!-- Per-section search -->
-                    <div class="section-search">
-                        <input type="text"
+                    <!-- Toolbar -->
+                    <div class="section-toolbar">
+                        <input class="search-input" type="text"
                                placeholder="Search in {{ source }}..."
-                               onkeyup="filterSection(this, 'table-{{ loop.index }}')">
+                               oninput="filterTable(this, '{{ tid }}')">
+                        <select class="sort-select" onchange="sortTable(this, '{{ tid }}')">
+                            <option value="">Sort by...</option>
+                            <option value="title">Title A→Z</option>
+                            <option value="price-asc">Price Low→High</option>
+                            <option value="price-desc">Price High→Low</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                        <span class="result-count" id="cnt-{{ loop.index }}">{{ source_books | length }} results</span>
                     </div>
 
                     <!-- Table -->
-                    <div class="table-wrapper">
-                        <table id="table-{{ loop.index }}">
+                    <div class="table-wrap">
+                        <table id="{{ tid }}">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th class="td-index">#</th>
                                     <th>Title</th>
                                     <th>Price</th>
                                     <th>Rating</th>
                                     <th>Availability</th>
                                     <th>URL</th>
                                     <th>Scraped At</th>
+                                    <th>History</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for book in source_books %}
-                                <tr>
-                                    <td>{{ loop.index }}</td>
-                                    <td>{{ book.title }}</td>
-                                    <td>{{ "%.2f" | format(book.price) }}</td>
+                                <tr data-title="{{ book.title | lower }}"
+                                    data-price="{{ book.price }}"
+                                    data-rating="{{ book.rating }}">
+                                    <td class="td-index">{{ loop.index }}</td>
+                                    <td class="td-title"><span title="{{ book.title }}">{{ book.title }}</span></td>
+                                    <td class="td-price">{{ "%.2f" | format(book.price) }}</td>
                                     <td>
-                                        {% if book.rating is number and book.rating > 0 %}
+                                        {% if book.rating and book.rating > 0 %}
                                         <span class="stars">
                                             {% for _ in range(book.rating | int) %}★{% endfor %}
                                             {% for _ in range(5 - (book.rating | int)) %}☆{% endfor %}
                                         </span>
                                         {% else %}
-                                        <span style="color:#ccc; font-size:0.8rem;">N/A</span>
+                                        <span class="stars-na">N/A</span>
                                         {% endif %}
                                     </td>
                                     <td>
                                         {% if book.availability == true %}
-                                            <span class="badge badge-available">In Stock</span>
+                                            <span class="badge badge-in">● In Stock</span>
                                         {% else %}
-                                            <span class="badge badge-unavailable">Out of Stock</span>
+                                            <span class="badge badge-out">● Out of Stock</span>
                                         {% endif %}
                                     </td>
-                                    <td>
-                                        <a class="url-link" href="{{ book.url }}" target="_blank" title="{{ book.url }}">
+                                    <td class="url-cell">
+                                        <a href="{{ book.url }}" target="_blank" title="{{ book.url }}">
                                             {{ book.url }}
                                         </a>
                                     </td>
-                                    <td>{{ book.timestamp }}</td>
+                                    <td class="td-time">{{ book.timestamp }}</td>
+                                    <td>
+                                        {% if book.price_history and book.price_history | length > 1 %}
+                                        <button class="history-btn"
+                                            onclick="showHistory({{ book.price_history | tojson }}, '{{ book.title | replace("'", "\\'") }}')">
+                                            📈 {{ book.price_history | length }}
+                                        </button>
+                                        {% else %}
+                                        <span style="color:#cbd5e1; font-size:0.78rem;">—</span>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -403,42 +651,112 @@
 
         {% else %}
         <div class="no-data">
-            No data found. Run <strong>python main.py</strong> to scrape books first.
+            <div class="icon">📭</div>
+            <p>No data found. Run <code>python main.py</code> first to scrape books.</p>
         </div>
         {% endif %}
 
     </main>
 </div>
 
+<!-- ═══════════════════════ PRICE HISTORY MODAL ═══════════════════════ -->
+<div class="modal-overlay" id="historyModal" onclick="closeModal(event)">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="modalTitle">Price History</h3>
+            <button class="modal-close" onclick="document.getElementById('historyModal').classList.remove('open')">✕</button>
+        </div>
+        <div class="modal-body">
+            <table class="history-table">
+                <thead>
+                    <tr><th>#</th><th>Price</th><th>Date</th></tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+    Book Price Tracker &nbsp;·&nbsp; Built with Python, MongoDB &amp; Flask
+</footer>
+
 <script>
+    // ── Collapse / Expand section
     function toggleSection(index) {
         const body = document.getElementById(`body-${index}`);
-        const icon = document.getElementById(`icon-${index}`);
-        body.classList.toggle("hidden");
-        icon.classList.toggle("open");
+        const btn  = document.getElementById(`cbtn-${index}`);
+        body.classList.toggle('collapsed');
+        btn.classList.toggle('open');
     }
 
-    function filterSection(input, tableId) {
+    // ── Per-section search filter
+    function filterTable(input, tableId) {
         const query = input.value.toLowerCase();
-        const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+        const rows  = document.querySelectorAll(`#${tableId} tbody tr`);
+        let visible = 0;
         rows.forEach(row => {
-            row.style.display = row.innerText.toLowerCase().includes(query) ? "" : "none";
+            const match = row.innerText.toLowerCase().includes(query);
+            row.classList.toggle('hidden-row', !match);
+            if (match) visible++;
         });
+        // update result count label
+        const cntEl = input.closest('.source-section')?.querySelector('.result-count');
+        if (cntEl) cntEl.textContent = `${visible} result${visible !== 1 ? 's' : ''}`;
     }
 
-    // Highlight active sidebar link on scroll
-    const sections = document.querySelectorAll(".source-section");
-    const navLinks = document.querySelectorAll("aside a");
-    window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach(section => {
-            if (window.scrollY >= section.offsetTop - 100) current = section.id;
+    // ── Sort table
+    function sortTable(select, tableId) {
+        const val   = select.value;
+        const tbody = document.querySelector(`#${tableId} tbody`);
+        if (!tbody || !val) return;
+        const rows  = Array.from(tbody.querySelectorAll('tr'));
+
+        rows.sort((a, b) => {
+            if (val === 'title')      return a.dataset.title.localeCompare(b.dataset.title);
+            if (val === 'price-asc')  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            if (val === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            if (val === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+            return 0;
         });
-        navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
+
+        rows.forEach(row => tbody.appendChild(row));
+        // re-index visible rows
+        rows.filter(r => !r.classList.contains('hidden-row'))
+            .forEach((r, i) => r.cells[0].textContent = i + 1);
+    }
+
+    // ── Price history modal
+    function showHistory(history, title) {
+        document.getElementById('modalTitle').textContent = `Price History — ${title}`;
+        const tbody = document.getElementById('historyBody');
+        tbody.innerHTML = history.map((h, i) =>
+            `<tr><td>${i + 1}</td><td>${parseFloat(h.price).toFixed(2)}</td><td>${h.date}</td></tr>`
+        ).join('');
+        document.getElementById('historyModal').classList.add('open');
+    }
+
+    function closeModal(e) {
+        if (e.target === document.getElementById('historyModal'))
+            document.getElementById('historyModal').classList.remove('open');
+    }
+
+    // ── Sidebar active link on scroll
+    const sections  = document.querySelectorAll('.source-section, #overview');
+    const sideLinks = document.querySelectorAll('.sidebar-link');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                sideLinks.forEach(l => l.classList.remove('active'));
+                const active = document.querySelector(`.sidebar-link[data-target="${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
         });
-    });
+    }, { rootMargin: '-20% 0px -75% 0px' });
+
+    sections.forEach(s => observer.observe(s));
 </script>
 
 </body>
