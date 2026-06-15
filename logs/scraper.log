@@ -1,0 +1,139 @@
+2026-06-15 21:31:09,565 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 21:31:09,572 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 21:31:09,572 - scrapers.static_scraper - INFO - Starting static scrape on http://books.toscrape.com/
+2026-06-15 21:31:33,939 - scrapers.static_scraper - INFO - Successfully scraped 20 books from static source.
+2026-06-15 21:31:33,941 - WDM - INFO - ====== WebDriver manager ======
+2026-06-15 21:31:34,079 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-06-15 21:31:35,591 - WDM - INFO - There is no [linux64] chromedriver "149.0.7827.115" for browser google-chrome "149.0.7827" in cache
+2026-06-15 21:31:35,629 - WDM - INFO - There is no [linux64] chromedriver "149.0.7827.115" for browser google-chrome "149.0.7827" in cache
+2026-06-15 21:31:35,629 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2026-06-15 21:31:36,200 - WDM - INFO - WebDriver version 149.0.7827.115 selected
+2026-06-15 21:31:36,206 - WDM - INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/149.0.7827.115/linux64/chromedriver-linux64.zip
+2026-06-15 21:31:36,207 - WDM - INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/149.0.7827.115/linux64/chromedriver-linux64.zip
+2026-06-15 21:31:36,359 - WDM - INFO - Driver downloading response is 200
+2026-06-15 21:31:37,696 - WDM - INFO - Driver has been saved in cache [/home/sidhharth/.wdm/drivers/chromedriver/linux64/149.0.7827.115]
+2026-06-15 21:31:38,003 - scrapers.selenium_scraper - INFO - Selenium WebDriver initialized successfully.
+2026-06-15 21:31:38,003 - scrapers.selenium_scraper - INFO - Starting selenium scrape on http://books.toscrape.com/
+2026-06-15 21:31:49,373 - scrapers.selenium_scraper - ERROR - Selenium scraping failed: Message: 
+Stacktrace:
+#0 0x59576041529a <unknown>
+#1 0x59575fdf7449 <unknown>
+#2 0x59575fe4bbaf <unknown>
+#3 0x59575fe4be01 <unknown>
+#4 0x59575fe96ae4 <unknown>
+#5 0x59575fe93cbf <unknown>
+#6 0x59575fe3f132 <unknown>
+#7 0x59575fe3ff41 <unknown>
+#8 0x5957603db737 <unknown>
+#9 0x5957603d9f39 <unknown>
+#10 0x5957603c4c26 <unknown>
+#11 0x5957603daada <unknown>
+#12 0x5957603acbd0 <unknown>
+#13 0x595760401c28 <unknown>
+#14 0x595760401dc5 <unknown>
+#15 0x595760413e1e <unknown>
+#16 0x765991ca27f1 <unknown>
+#17 0x765991d33b5c <unknown>
+
+2026-06-15 21:31:49,459 - pipeline.cleaner - INFO - Cleaned 20 records.
+2026-06-15 21:31:49,491 - __main__ - INFO - Successfully processed and stored 20 books.
+2026-06-15 21:31:49,492 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:20:07,035 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 22:20:07,040 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:20:07,040 - scrapers.static_scraper - INFO - Starting static scrape on http://books.toscrape.com/
+2026-06-15 22:20:08,033 - scrapers.static_scraper - INFO - Successfully scraped 20 books from static source.
+2026-06-15 22:20:08,036 - WDM - INFO - ====== WebDriver manager ======
+2026-06-15 22:20:08,093 - WDM - INFO - Driver [/home/sidhharth/.wdm/drivers/chromedriver/linux64/149.0.7827.115/chromedriver-linux64/chromedriver] found in cache by browser version
+2026-06-15 22:20:08,473 - scrapers.selenium_scraper - INFO - Selenium WebDriver initialized successfully.
+2026-06-15 22:20:08,473 - scrapers.selenium_scraper - INFO - Starting selenium scrape on DYNAMIC_SITE_URL=http://your-new-site.com/
+2026-06-15 22:20:08,486 - scrapers.selenium_scraper - ERROR - Selenium scraping failed: Message: invalid argument
+  (Session info: chrome=149.0.7827.102)
+Stacktrace:
+#0 0x6307c09d729a <unknown>
+#1 0x6307c03b9200 <unknown>
+#2 0x6307c03a03c8 <unknown>
+#3 0x6307c039e780 <unknown>
+#4 0x6307c039edf0 <unknown>
+#5 0x6307c03bceed <unknown>
+#6 0x6307c04569db <unknown>
+#7 0x6307c0455cbf <unknown>
+#8 0x6307c0401132 <unknown>
+#9 0x6307c0401f41 <unknown>
+#10 0x6307c099d737 <unknown>
+#11 0x6307c099bf39 <unknown>
+#12 0x6307c0986c26 <unknown>
+#13 0x6307c099cada <unknown>
+#14 0x6307c096ebd0 <unknown>
+#15 0x6307c09c3c28 <unknown>
+#16 0x6307c09c3dc5 <unknown>
+#17 0x6307c09d5e1e <unknown>
+#18 0x7f6481ca27f1 <unknown>
+#19 0x7f6481d33b5c <unknown>
+
+2026-06-15 22:20:08,584 - pipeline.cleaner - INFO - Cleaned 20 records.
+2026-06-15 22:20:08,595 - __main__ - INFO - Successfully processed and stored 20 books.
+2026-06-15 22:20:08,595 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:27:16,799 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 22:27:16,805 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:27:16,805 - scrapers.static_scraper - INFO - Starting static scrape on https://manybooks.net/
+2026-06-15 22:27:17,076 - scrapers.static_scraper - WARNING - 403 Client Error: Forbidden for url: https://manybooks.net/, Retrying in 2 seconds...
+2026-06-15 22:27:19,288 - scrapers.static_scraper - WARNING - 403 Client Error: Forbidden for url: https://manybooks.net/, Retrying in 4 seconds...
+2026-06-15 22:27:23,452 - __main__ - ERROR - Static scraper failed: 403 Client Error: Forbidden for url: https://manybooks.net/
+2026-06-15 22:27:23,456 - WDM - INFO - ====== WebDriver manager ======
+2026-06-15 22:27:23,513 - WDM - INFO - Driver [/home/sidhharth/.wdm/drivers/chromedriver/linux64/149.0.7827.115/chromedriver-linux64/chromedriver] found in cache by browser version
+2026-06-15 22:27:23,896 - scrapers.selenium_scraper - INFO - Selenium WebDriver initialized successfully.
+2026-06-15 22:27:23,896 - scrapers.selenium_scraper - INFO - Starting selenium scrape on https://manybooks.net/
+2026-06-15 22:27:35,547 - scrapers.selenium_scraper - ERROR - Selenium scraping failed: Message: 
+Stacktrace:
+#0 0x5921e15da29a <unknown>
+#1 0x5921e0fbc449 <unknown>
+#2 0x5921e1010baf <unknown>
+#3 0x5921e1010e01 <unknown>
+#4 0x5921e105bae4 <unknown>
+#5 0x5921e1058cbf <unknown>
+#6 0x5921e1004132 <unknown>
+#7 0x5921e1004f41 <unknown>
+#8 0x5921e15a0737 <unknown>
+#9 0x5921e159ef39 <unknown>
+#10 0x5921e1589c26 <unknown>
+#11 0x5921e159fada <unknown>
+#12 0x5921e1571bd0 <unknown>
+#13 0x5921e15c6c28 <unknown>
+#14 0x5921e15c6dc5 <unknown>
+#15 0x5921e15d8e1e <unknown>
+#16 0x7fa6e7ca27f1 <unknown>
+#17 0x7fa6e7d33b5c <unknown>
+
+2026-06-15 22:27:35,630 - __main__ - WARNING - No data scraped.
+2026-06-15 22:27:35,631 - __main__ - INFO - --- Book Tracker Automation Finished ---
+2026-06-15 22:28:13,400 - __main__ - INFO - --- Starting Book Tracker Automation ---
+2026-06-15 22:28:13,406 - database.mongo - INFO - Connected to MongoDB successfully.
+2026-06-15 22:28:13,406 - scrapers.static_scraper - INFO - Starting static scrape on https://openlibrary.org/
+2026-06-15 22:28:18,419 - scrapers.static_scraper - INFO - Successfully scraped 0 books from static source.
+2026-06-15 22:28:18,421 - WDM - INFO - ====== WebDriver manager ======
+2026-06-15 22:28:18,471 - WDM - INFO - Driver [/home/sidhharth/.wdm/drivers/chromedriver/linux64/149.0.7827.115/chromedriver-linux64/chromedriver] found in cache by browser version
+2026-06-15 22:28:18,838 - scrapers.selenium_scraper - INFO - Selenium WebDriver initialized successfully.
+2026-06-15 22:28:18,838 - scrapers.selenium_scraper - INFO - Starting selenium scrape on https://openlibrary.org/
+2026-06-15 22:28:35,325 - scrapers.selenium_scraper - ERROR - Selenium scraping failed: Message: 
+Stacktrace:
+#0 0x5737fe60829a <unknown>
+#1 0x5737fdfea449 <unknown>
+#2 0x5737fe03ebaf <unknown>
+#3 0x5737fe03ee01 <unknown>
+#4 0x5737fe089ae4 <unknown>
+#5 0x5737fe086cbf <unknown>
+#6 0x5737fe032132 <unknown>
+#7 0x5737fe032f41 <unknown>
+#8 0x5737fe5ce737 <unknown>
+#9 0x5737fe5ccf39 <unknown>
+#10 0x5737fe5b7c26 <unknown>
+#11 0x5737fe5cdada <unknown>
+#12 0x5737fe59fbd0 <unknown>
+#13 0x5737fe5f4c28 <unknown>
+#14 0x5737fe5f4dc5 <unknown>
+#15 0x5737fe606e1e <unknown>
+#16 0x7ca2f4ca27f1 <unknown>
+#17 0x7ca2f4d33b5c <unknown>
+
+2026-06-15 22:28:35,409 - __main__ - WARNING - No data scraped.
+2026-06-15 22:28:35,410 - __main__ - INFO - --- Book Tracker Automation Finished ---
