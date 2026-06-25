@@ -23,23 +23,10 @@ LOG_FILE = "logs/scraper.log"
 # ---------------------------------------------------------------------------
 SITES = [
     {
-        "name": "BooksToScrape",
-        "url": "http://books.toscrape.com/",
-        "type": "static",
-        "selectors": {
-            "book_container": "article.product_pod",
-            "title": "h3 a",
-            "price": "p.price_color",
-            "rating": "p.star-rating",
-            "availability": "p.instock.availability",
-            "link": "h3 a",
-        }
-    },
-    {
-        "name": "Kitabay",
-        "url": "https://kitabay.com/",
-        "type": "shopify",
-    },
+        "name": "blah blah",
+        "url": "https://idriesshahfoundation.org/books/the-hundred-tales-of-wisdom/?gad_source=1&gad_campaignid=15498754015&gbraid=0AAAAADo_UPhLlmDv5D_i6DQ-WJxRCFpDS&gclid=Cj0KCQjwo_PRBhDNARIsAEcVALVjD_WyuYt354f8KiHF1uzge8h16n3C_bCl1Ljz7hDOLDXf935GjLYaAobCEALw_wcB",
+        "type": "selenium",
+    }
     # -----------------------------------------------------------------------
     # Template — copy and fill in to add a new site
     # -----------------------------------------------------------------------
